@@ -586,16 +586,3 @@ Create the file DragNDropHere.bat in the same dir as follows
 Then drag your video file on it
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
