@@ -17,7 +17,7 @@ Output format for general statistics (stdout):
 {Frametype}: This select the group of frames considered
 {N} = Number of frames in the considered group
 {N/TOT} = % of N over total number frames
-{Total Size} = Sum of size in bytes of frames in the considered group, as measured by ffprobe in frmae->pkt_size
+{Total Size} = Sum of size in bytes of frames in the considered group, as measured by ffprobe in frame->pkt_size
 {Total Size/TOT} = % Total size of frame in group over total size of every frame
 {Average Size} = {Total Size} / {N}
 {AVERAGE QP} = Average QP of all macroblocks in the group. If video is 10 bit, -12 is added to this value.
