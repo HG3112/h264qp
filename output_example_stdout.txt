@@ -1,0 +1,87 @@
+TOT:
+N               : 2184
+N/TOT           : 100.000000 %
+Total Size      : 66292332
+Total Size/TOT  : 100.000000 %
+Average Size    : 30353.631868
+AVERAGE QP      : 17.706512
+StdDev (frames) : 2.657935
+StdDev (MB)     : 3.831535
+
+B:
+N               : 1356
+N/TOT           : 62.087912 %
+Total Size      : 20079449
+Total Size/TOT  : 30.289248 %
+Average Size    : 14807.853245
+AVERAGE QP      : 18.574787
+StdDev (frames) : 2.457394
+StdDev (MB)     : 3.620069
+
+P:
+N               : 683
+N/TOT           : 31.272894 %
+Total Size      : 29901471
+Total Size/TOT  : 45.105475 %
+Average Size    : 43779.606149
+AVERAGE QP      : 16.974840
+StdDev (frames) : 1.761636
+StdDev (MB)     : 3.412171
+
+K+I:
+N               : 145
+N/TOT           : 6.639194 %
+Total Size      : 16311412
+Total Size/TOT  : 24.605277 %
+Average Size    : 112492.496552
+AVERAGE QP      : 13.033074
+StdDev (frames) : 1.975820
+StdDev (MB)     : 3.508927
+
+K:
+N               : 65
+N/TOT           : 2.976190 %
+Total Size      : 7638583
+Total Size/TOT  : 11.522574 %
+Average Size    : 117516.661538
+AVERAGE QP      : 12.336248
+StdDev (frames) : 2.334845
+StdDev (MB)     : 3.673834
+
+I:
+N               : 80
+N/TOT           : 3.663004 %
+Total Size      : 8672829
+Total Size/TOT  : 13.082703 %
+Average Size    : 108410.362500
+AVERAGE QP      : 13.599245
+StdDev (frames) : 1.389726
+StdDev (MB)     : 3.261150
+
+P+B:
+N               : 2039
+N/TOT           : 93.360806 %
+Total Size      : 49980920
+Total Size/TOT  : 75.394723 %
+Average Size    : 24512.466896
+AVERAGE QP      : 18.038856
+StdDev (frames) : 2.371867
+StdDev (MB)     : 3.631173
+
+Consecutive B-Frames (number of B-Frames in each group) :
+1 : 88 ( 6.489676 % )
+2 : 102 ( 7.522124 % )
+3 : 309 ( 22.787611 % )
+4 : 232 ( 17.109145 % )
+5 : 140 ( 10.324484 % )
+6 : 90 ( 6.637168 % )
+7 : 70 ( 5.162242 % )
+8 : 80 ( 5.899705 % )
+9 : 36 ( 2.654867 % )
+10 : 70 ( 5.162242 % )
+11 : 11 ( 0.811209 % )
+12 : 36 ( 2.654867 % )
+13 : 13 ( 0.958702 % )
+14 : 0 ( 0.000000 % )
+15 : 15 ( 1.106195 % )
+16 : 64 ( 4.719764 % )
