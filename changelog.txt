@@ -1,0 +1,14 @@
+241102
+- Fixed a potential "array out of bounds" bug.
+
+241101
+- Bugfix in dragNDropHere.bat for space in file/dir names
+- Restyled output
+- Statistics on consecutive B-Frames
+- Preliminarily extract the raw h264 stream for ffprobe input. Now ffmpeg.exe is also required. 
+- Hopefully fixed a major bug for ffprobe occasionally displaying multiple times some initial frames on stderr, resulting in a frame mismatch for stdout vs stderr.
+- Other minor bugfix and errors handling.
+- Subtract 12 to qp for 10bit input (note: this is in contrast with the x264 log output)
+
+241024
+- First release. ffprobe.exe required.
