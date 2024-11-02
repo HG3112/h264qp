@@ -60,6 +60,12 @@ Values are separated by tab.
 
 ********************************
 
+BUILD
+
+The script is for Windows. It is only one .cpp file, so it is easy to build with your preferred compiler. On Embarcadero Dev-cpp (g++) it needs the options -std=c++17.
+
+********************************
+
 TECH
 
 The script launches the command
