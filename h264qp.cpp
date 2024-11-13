@@ -6,7 +6,6 @@
 #include <thread>
 
 #define LINE_BUFFER_SIZE 7000 //sufficiente anche per video 8k
-#define MAX_MB 700000 //sufficiente anche per video 8k
 #define ISNUM(x) ((x>='0')&&(x<='9'))
 #define ISNUM_(x) (((x>='0')&&(x<='9'))||(x==' '))
 #define QPV(x) (x==' ' ? 0 : x-'0')
@@ -22,7 +21,6 @@
 #define ERR_STDOUT_END_INVALID 7
 #define ERR_FRAME_MISMATCH 8
 #define ERR_OUTPUT_STATS 9
-#define ERR_TOO_MANY_MB 1000
 
 struct frameA
 {
@@ -131,13 +129,14 @@ int64_t sttoint(const char* pp)
 
 void threadF(shared* sD)
 {
-	char* mbarr=new char[MAX_MB]; //macroblocks
 	char* line=new char [LINE_BUFFER_SIZE];
 	char* cptr;
 	int mbcount,x;
 	int newframeflag=0;
 	int startflag=0;//discard reduntant initial frames
 	int mbcount_check=-1;
+	
+	double tmpd;
 	
 	frameB* currentFrameB=NULL;	
 	sD->chain=currentFrameB;	
@@ -192,49 +191,40 @@ void threadF(shared* sD)
 
 				while (ISNUM_(*cptr))
 				{
-					mbarr[mbcount]=10*(QPV(*cptr));
+					tmpd=10*(QPV(*cptr));
 					cptr++;
-					mbarr[mbcount]+=QPV(*cptr);
+					tmpd+=QPV(*cptr);
 					cptr++;
+					currentFrameB->avg_qp+=tmpd;
+					currentFrameB->stdevQ_qp+=tmpd*tmpd;
+					
 					mbcount++;
-					if (mbcount==MAX_MB)
-					{
-						sD->counterB=-1;
-						delete [] mbarr;
-						delete [] line;
-						fprintf(stderr,"[LOG] Too many macroblocks. Closing app.");
-						pclose(sD->pipeA);
-						CloseHandle(sD->pipeB);
-						exit(ERR_TOO_MANY_MB);	
-					}
 				}
 			}
+			
+			if (mbcount_check==-1) fprintf(stderr,"[LOG] Macroblocks per frame: %d\n",mbcount);
+			
 			if (mbcount_check!=-1) if (mbcount_check!=mbcount)
 			{
 				sD->counterB=-1;
-				delete [] mbarr;
 				delete [] line;
 				fprintf(stderr,"[LOG] Something went wrong while parsing (mbcount_check). Closing app.");
 				pclose(sD->pipeA);
 				CloseHandle(sD->pipeB);
 				exit(ERR_MB_CHECK);				
 			}
-			for(x=0; x<mbcount; x++)
-				currentFrameB->avg_qp+=mbarr[x];
 			currentFrameB->avg_qp/=mbcount;
-			for(x=0; x<mbcount; x++)
-				currentFrameB->stdevQ_qp+=(mbarr[x]-currentFrameB->avg_qp)*(mbarr[x]-currentFrameB->avg_qp);	
 			currentFrameB->stdevQ_qp/=mbcount;
+			currentFrameB->stdevQ_qp-=currentFrameB->avg_qp*currentFrameB->avg_qp;
 		}
-	}	
-	delete [] mbarr;
+	}
 	delete [] line;
 	return;
 }
 
 int main(int argv,char** argc) {
 	//////////////////////////////////////////////////////////////////////////// M A I N //////
-	int build=241102;
+	int build=241113;
 	
 	char* line=new char [LINE_BUFFER_SIZE];
 	frameA* chain = NULL;
@@ -296,7 +286,7 @@ int main(int argv,char** argc) {
 	int flag10=0;
 	int flagh264=0;
 	fprintf(stderr,"[LOG] STARTING ffprobe.exe FOR BASIC INFO\n");
-	cmd=std::string("ffprobe -threads 1 -v quiet -select_streams V:0 -show_streams \"")+std::string(argc[1])+std::string("\"");
+	cmd=std::string("ffprobe.exe -threads 1 -v quiet -select_streams V:0 -show_streams \"")+std::string(argc[1])+std::string("\"");
 	sharedData.pipeA=popen(cmd.c_str(),"rb");
 	if(sharedData.pipeA==NULL)
 	{
@@ -341,11 +331,10 @@ int main(int argv,char** argc) {
 	
 	//standard pipe for stdout, start ffprobe analysis
 	fprintf(stderr,"[LOG] STARTING ffmpeg.exe | ffprobe.exe FOR ANALYSIS\n");
-	cmd=std::string("ffmpeg -hide_banner -loglevel error -threads 1 -i \"")
+	cmd=std::string("ffmpeg.exe -hide_banner -loglevel error -threads 1 -i \"")
 			+std::string(argc[1])
-			+std::string("\" -map 0:V:0 -c:v copy -f h264 pipe: | ffprobe -threads 1 -v quiet -show_frames -show_streams -show_entries frame=key_frame,pkt_pos,pkt_size,pict_type -debug qp -i pipe: 2>>\\\\.\\pipe\\ffprobe_stderr_PID")
+			+std::string("\" -map 0:V:0 -c:v copy -f h264 pipe: | ffprobe.exe -threads 1 -v quiet -show_frames -show_streams -show_entries frame=key_frame,pkt_pos,pkt_size,pict_type -debug qp -i pipe: 2>>\\\\.\\pipe\\ffprobe_stderr_PID")
 			+std::to_string(pid);
-	//fprintf(stderr,"[LOG] [CMD] %s\n",cmd.c_str());
 	sharedData.pipeA=popen(cmd.c_str(),"rb");
 	if(sharedData.pipeA==NULL)
 	{
@@ -538,6 +527,8 @@ int main(int argv,char** argc) {
 	printf("\n");
 	for(x=0;x<maxB;x++)
 		printf("%d : %d ( %f %% )\n",x+1,cBf[x],100.0*cBf[x]/totB);
+		
+	delete [] cBf;
 	
 	//PER FRAME STATISTICS
 	if (argv==3)
