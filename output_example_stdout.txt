@@ -1,87 +1,87 @@
 TOT:
-N               : 2184
+N               : 34526
 N/TOT           : 100.000000 %
-Total Size      : 66292332
+Total Size      : 178735281
 Total Size/TOT  : 100.000000 %
-Average Size    : 30353.631868
-AVERAGE QP      : 17.706512
-StdDev (frames) : 2.657935
-StdDev (MB)     : 3.831535
+Average Size    : 5176.831402
+AVERAGE QP      : 22.091099
+StdDev (frames) : 3.824017
+StdDev (MB)     : 4.077364
 
 B:
-N               : 1356
-N/TOT           : 62.087912 %
-Total Size      : 20079449
-Total Size/TOT  : 30.289248 %
-Average Size    : 14807.853245
-AVERAGE QP      : 18.574787
-StdDev (frames) : 2.457394
-StdDev (MB)     : 3.620069
+N               : 27701
+N/TOT           : 80.232289 %
+Total Size      : 59589405
+Total Size/TOT  : 33.339475 %
+Average Size    : 2151.164398
+AVERAGE QP      : 23.661084
+StdDev (frames) : 2.027231
+StdDev (MB)     : 2.285781
 
 P:
-N               : 683
-N/TOT           : 31.272894 %
-Total Size      : 29901471
-Total Size/TOT  : 45.105475 %
-Average Size    : 43779.606149
-AVERAGE QP      : 16.974840
-StdDev (frames) : 1.761636
-StdDev (MB)     : 3.412171
+N               : 6485
+N/TOT           : 18.782946 %
+Total Size      : 95368032
+Total Size/TOT  : 53.357139 %
+Average Size    : 14705.941712
+AVERAGE QP      : 15.841530
+StdDev (frames) : 2.558459
+StdDev (MB)     : 3.500882
 
 K+I:
-N               : 145
-N/TOT           : 6.639194 %
-Total Size      : 16311412
-Total Size/TOT  : 24.605277 %
-Average Size    : 112492.496552
-AVERAGE QP      : 13.033074
-StdDev (frames) : 1.975820
-StdDev (MB)     : 3.508927
+N               : 340
+N/TOT           : 0.984765 %
+Total Size      : 23777844
+Total Size/TOT  : 13.303386 %
+Average Size    : 69934.835294
+AVERAGE QP      : 13.380194
+StdDev (frames) : 1.896677
+StdDev (MB)     : 2.664836
 
 K:
-N               : 65
-N/TOT           : 2.976190 %
-Total Size      : 7638583
-Total Size/TOT  : 11.522574 %
-Average Size    : 117516.661538
-AVERAGE QP      : 12.336248
-StdDev (frames) : 2.334845
-StdDev (MB)     : 3.673834
+N               : 335
+N/TOT           : 0.970283 %
+Total Size      : 23569736
+Total Size/TOT  : 13.186952 %
+Average Size    : 70357.420896
+AVERAGE QP      : 13.339524
+StdDev (frames) : 1.871701
+StdDev (MB)     : 2.647920
 
 I:
-N               : 80
-N/TOT           : 3.663004 %
-Total Size      : 8672829
-Total Size/TOT  : 13.082703 %
-Average Size    : 108410.362500
-AVERAGE QP      : 13.599245
-StdDev (frames) : 1.389726
-StdDev (MB)     : 3.261150
+N               : 5
+N/TOT           : 0.014482 %
+Total Size      : 208108
+Total Size/TOT  : 0.116434 %
+Average Size    : 41621.600000
+AVERAGE QP      : 16.105042
+StdDev (frames) : 1.538816
+StdDev (MB)     : 2.363726
 
 P+B:
-N               : 2039
-N/TOT           : 93.360806 %
-Total Size      : 49980920
-Total Size/TOT  : 75.394723 %
-Average Size    : 24512.466896
-AVERAGE QP      : 18.038856
-StdDev (frames) : 2.371867
-StdDev (MB)     : 3.631173
+N               : 34186
+N/TOT           : 99.015235 %
+Total Size      : 154957437
+Total Size/TOT  : 86.696614 %
+Average Size    : 4532.774732
+AVERAGE QP      : 22.177734
+StdDev (frames) : 3.737725
+StdDev (MB)     : 3.994677
 
 Consecutive B-Frames (number of B-Frames in each group) :
-1 : 88 ( 6.489676 % )
-2 : 102 ( 7.522124 % )
-3 : 309 ( 22.787611 % )
-4 : 232 ( 17.109145 % )
-5 : 140 ( 10.324484 % )
-6 : 90 ( 6.637168 % )
-7 : 70 ( 5.162242 % )
-8 : 80 ( 5.899705 % )
-9 : 36 ( 2.654867 % )
-10 : 70 ( 5.162242 % )
-11 : 11 ( 0.811209 % )
-12 : 36 ( 2.654867 % )
-13 : 13 ( 0.958702 % )
-14 : 0 ( 0.000000 % )
-15 : 15 ( 1.106195 % )
-16 : 64 ( 4.719764 % )
+1 : 261 ( 0.942204 % )
+2 : 802 ( 2.895202 % )
+3 : 4941 ( 17.836901 % )
+4 : 2876 ( 10.382297 % )
+5 : 9620 ( 34.727988 % )
+6 : 4062 ( 14.663731 % )
+7 : 2793 ( 10.082668 % )
+8 : 688 ( 2.483665 % )
+9 : 423 ( 1.527021 % )
+10 : 210 ( 0.758095 % )
+11 : 176 ( 0.635356 % )
+12 : 168 ( 0.606476 % )
+13 : 78 ( 0.281578 % )
+14 : 154 ( 0.555937 % )
+15 : 225 ( 0.812245 % )
+16 : 224 ( 0.808635 % )

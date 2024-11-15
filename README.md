@@ -12,7 +12,7 @@ Optionally, it writes detailed statistics for each frame in outputStatsFile
 
 Log messages are on stderr
 
-Requires ffmpeg.exe and ffprobe.exe in same (current) dir or PATH (tested with ffmpeg 7.1 on Windows 10)
+Requires ffmpeg.exe and ffprobe.exe in same dir or PATH (tested with ffmpeg 7.1 on Windows 10)
 
 ********************************
 
@@ -44,7 +44,7 @@ Output format for per-frame statistics (outputStatsFile):
 
 First row is number of frames. Next rows are info on each frame
 
-{TYPE} {SIZE} {POSITION} {AVG QP} {STDEV QP-MB}
+{TYPE} {SIZE} {POSITION} {AVG QP} {STDEV QP-MB} {MIN-QP} {MAX-QP}
 
 Values are separated by tab.
 
@@ -54,9 +54,11 @@ Values are separated by tab.
 
 {POSITION} = pkt_pos in FRAME field by ffprobe
 
-{AVG QP} = Average QP of all macroblocks in the frame, as calculated from -debug qp. If video is 10 bit, -12 is added to this value.
+{AVG QP} = Average QP of each macroblock in the frame, as calculated from -debug qp. If video is 10 bit, -12 is added to this value.
 
 {STDEV QP-MB}: Standard deviation of MacroBlocks QP values in the frame
+
+{MIN-QP} {MAX-QP}: Minimum and maximum quantizer of macroblocks qp in frame.
 
 ********************************
 
@@ -78,6 +80,6 @@ and parses the outputs in stdout and stderr.
 
 NOTES:
 
-1) For fast use, drag and drop video file in DragNDropHere.bat. A .txt file with general statistic and a .dat file with per frame statistic will be generated in the same dir as the input (ffmpeg and ffprobe must be in PATH)
+1) For fast use, drag and drop video file in DragNDropHere.bat. A .txt file with general statistic and a .dat file with per frame statistic will be generated in the same dir as the input
 2) Progress LOG messages are reported each 1000 frames analyzed
 3) For 8bit x264 encoding, QP analysis coincides with the encoding log of x264. For 10bit QP are shifted by -12. Average frame size can be a little different. Consecutive BFrames are calculated in a different way than x264 log. 

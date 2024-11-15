@@ -5,6 +5,8 @@
 #include <filesystem>
 #include <thread>
 
+#define BUILD 241115
+
 #define LINE_BUFFER_SIZE 7000 //sufficiente anche per video 8k
 #define ISNUM(x) ((x>='0')&&(x<='9'))
 #define ISNUM_(x) (((x>='0')&&(x<='9'))||(x==' '))
@@ -34,6 +36,8 @@ struct frameB
 {
 	double avg_qp;
 	double stdevQ_qp;
+	int minqp;
+	int maxqp;
 
 	frameB* next;
 };
@@ -136,7 +140,7 @@ void threadF(shared* sD)
 	int startflag=0;//discard reduntant initial frames
 	int mbcount_check=-1;
 	
-	double tmpd;
+	int tmpi;
 	
 	frameB* currentFrameB=NULL;	
 	sD->chain=currentFrameB;	
@@ -165,6 +169,8 @@ void threadF(shared* sD)
 			}
 			currentFrameB->avg_qp=0.0;
 			currentFrameB->stdevQ_qp=0.0;
+			currentFrameB->minqp=999;
+			currentFrameB->maxqp=-999;
 			currentFrameB->next=NULL;
 			sD->counterB++;
 			
@@ -191,12 +197,14 @@ void threadF(shared* sD)
 
 				while (ISNUM_(*cptr))
 				{
-					tmpd=10*(QPV(*cptr));
+					tmpi=10*(QPV(*cptr));
 					cptr++;
-					tmpd+=QPV(*cptr);
+					tmpi+=QPV(*cptr);
 					cptr++;
-					currentFrameB->avg_qp+=tmpd;
-					currentFrameB->stdevQ_qp+=tmpd*tmpd;
+					currentFrameB->avg_qp+=tmpi;
+					currentFrameB->stdevQ_qp+=tmpi*tmpi;
+					currentFrameB->minqp= currentFrameB->minqp < tmpi ? currentFrameB->minqp : tmpi;
+					currentFrameB->maxqp= currentFrameB->maxqp > tmpi ? currentFrameB->maxqp : tmpi;
 					
 					mbcount++;
 				}
@@ -247,7 +255,7 @@ int main(int argv,char** argc) {
 	}	
 	if (help==1)
 	{
-		printf("h264qp - Build %d - by HG\n\n",build);
+		printf("h264qp - Build %d - by HG\n\n",BUILD);
 		printf("USAGE:\n");
 		printf("1) h264qp.exe inputFile\n");
 		printf("2) h264qp.exe inputFile outputStatsFile\n\n");
@@ -260,7 +268,7 @@ int main(int argv,char** argc) {
 	}
 	
 	//INIT
-	fprintf(stderr,"[LOG] h264qp - Build %d - by HG\n[LOG] INPUT FILE: %s\n[LOG] OUTPUT STATS: ",build,argc[1]);
+	fprintf(stderr,"[LOG] h264qp - Build %d - by HG\n[LOG] INPUT FILE: %s\n[LOG] OUTPUT STATS: ",BUILD,argc[1]);
 	if (argv==3)
 		fprintf(stderr,argc[2]);
 	else
@@ -555,11 +563,15 @@ int main(int argv,char** argc) {
 			fputs(std::to_string(currentFrameB->avg_qp-12.0*flag10).c_str(),out);
 			fputc('\t',out);
 			fputs(std::to_string(sqrt(currentFrameB->stdevQ_qp)).c_str(),out);
+			fputc('\t',out);
+			fputs(std::to_string(currentFrameB->minqp-12*flag10).c_str(),out);
+			fputc('\t',out);
+			fputs(std::to_string(currentFrameB->maxqp-12*flag10).c_str(),out);
 			fputc('\n',out);
+			
 			currentFrameA=currentFrameA->next;
 			currentFrameB=currentFrameB->next;			
 		}
-		//TODO? delete chains	
 		fclose(out);
 	}	
 	//CLOSING

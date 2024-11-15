@@ -1,3 +1,7 @@
+241115
+- Added cd command to dragndrophere.bat
+- Per frame min/max qp statistics
+
 241113
 - Better memory management
 
